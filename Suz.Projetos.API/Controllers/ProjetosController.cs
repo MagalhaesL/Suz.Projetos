@@ -42,5 +42,19 @@ namespace Suz.Projetos.API.Controllers
                 return BadRequest();
             }
         }
+
+        [HttpGet("filter")]
+        public async Task<IActionResult> FiltrarProjetos([FromQuery] int? categoriaId, [FromQuery] int? subcategoriaId)
+        {
+            try
+            {
+                var result = await _projetoRepository.GetByCategoriaSubcategoriaAsync(categoriaId, subcategoriaId);
+                return Ok(result);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
     }
 }
