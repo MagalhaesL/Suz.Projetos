@@ -6,6 +6,6 @@
         public string Nome { get; set; }
         public int CPF { get; set; }
 
-        public ICollection<Projeto>? Projetos { get; set; }
+        public ICollection<Projeto> Projetos { get; set; } // Relacionamento de um para muitos com Projeto
     }
 }

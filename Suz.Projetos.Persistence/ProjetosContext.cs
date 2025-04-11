@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using System.Reflection.Emit;
 using Microsoft.EntityFrameworkCore;
 using Suz.Projetos.Domain.Entities;
 
@@ -13,7 +14,13 @@ namespace Suz.Projetos.Persistence
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+            base.OnModelCreating(builder);
+
+            // Configuração do relacionamento entre Pessoa e Projeto
+            builder.Entity<Pessoa>()
+                .HasMany(p => p.Projetos)
+                .WithOne(p => p.Autor)
+                .HasForeignKey(p => p.AutorId);
         }
     }
 }
