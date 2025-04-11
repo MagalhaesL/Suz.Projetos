@@ -13,6 +13,15 @@ namespace Suz.Projetos.Persistence.Configurations
             builder.Property(e => e.Nome)
                 .IsRequired()
                 .HasMaxLength(255);
+
+            builder.Property(e => e.CPF)
+              .IsRequired()
+              .HasMaxLength(11);
+
+            builder.HasMany(e => e.Projetos)
+               .WithOne(e => e.Autor)
+               .HasForeignKey(e => e.Id)
+               .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }
